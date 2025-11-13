@@ -1,36 +1,46 @@
-// Animate skill bars when they appear
-const skillBars = document.querySelectorAll(".skill-progress");
+// Function to load any page dynamically
+function loadPage(url){
+  fetch(url)
+    .then(response => {
+      if(!response.ok) throw new Error("Page not found");
+      return response.text();
+    })
+    .then(html => {
+      const container = document.getElementById("page-content");
 
-function animateSkills() {
-  skillBars.forEach(bar => {
-    const width = bar.dataset.width;
-    bar.style.width = width + "%";
-  });
+      // If page is a full HTML document, extract body content
+      let content = html;
+      const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+      if(bodyMatch){
+        content = bodyMatch[1]; // extract only body content
+      }
+
+      container.innerHTML = content; // display page content
+    })
+    .catch(err => {
+      console.error(err);
+      const container = document.getElementById("page-content");
+      container.innerHTML = "<p>Page could not be loaded.</p>";
+    });
 }
 
-// Smooth scroll for nav links
+// Handle navigation clicks
 const navLinks = document.querySelectorAll("nav ul li a");
 navLinks.forEach(link => {
   link.addEventListener("click", e => {
-    if(link.hash){
-      e.preventDefault();
-      const target = document.querySelector(link.hash);
-      target.scrollIntoView({ behavior: "smooth" });
+    const href = link.getAttribute("href");
+
+    // Resume download, let browser handle
+    if(link.hasAttribute("download")){
+      return;
     }
+
+    e.preventDefault(); // prevent default link navigation
+    loadPage(href);     // load clicked page dynamically
   });
 });
 
-// Animate skills when scrolled into view
-function isInViewport(el) {
-  const rect = el.getBoundingClientRect();
-  return rect.top <= window.innerHeight && rect.bottom >= 0;
-}
-
-function scrollHandler() {
-  if(document.querySelector("#skills") && isInViewport(document.querySelector("#skills"))){
-    animateSkills();
-    window.removeEventListener("scroll", scrollHandler);
-  }
-}
-
-window.addEventListener("scroll", scrollHandler);
+// Load About page by default
+window.addEventListener("DOMContentLoaded", () => {
+  loadPage("index.html");
+});
