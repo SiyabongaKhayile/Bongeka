@@ -44,3 +44,26 @@ navLinks.forEach(link => {
 window.addEventListener("DOMContentLoaded", () => {
   loadPage("index.html");
 });
+
+
+function initCarousel() {
+  const texts = document.querySelectorAll(".carousel-text");
+  if (!texts || texts.length === 0) return; // Exit if no carousel on page
+
+  let current = 0;
+
+  function showNextText() {
+    texts[current].classList.remove("active");
+    current = (current + 1) % texts.length;
+    texts[current].classList.add("active");
+  }
+
+  // Show "Experience" first for 5 seconds
+  texts.forEach(t => t.classList.remove("active"));
+  texts[0].classList.add("active");
+
+  setTimeout(() => {
+    // Start sliding through experience items every 3 seconds
+    setInterval(showNextText, 3000);
+  }, 5000);
+}

@@ -13,90 +13,33 @@
     --card-bg: rgba(255, 255, 255, 0.1);
 }
 
-
-#skills {
-  padding: 4rem 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
+/* Remove body margin/padding that might restrict width */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
-
-#skills h2 {
-  font-size: 2.5rem;
-  color: #0084c7;
-  margin-bottom: 3rem;
-}
-
-/* ===== Skills Container ===== */
-.skills-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
-/* ===== Each Skills Group ===== */
-.skills-group {
-  flex: 1 1 300px;
-  text-align: center;
-}
-
-.skills-group h3 {
-  font-size: 2rem;
-  color: #00abf0;
-  margin-bottom: 1.5rem;
-}
-
-/* ===== Skills Content (icons + names) ===== */
-.skills-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.skills-content span {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  color: #0084c7;
-  font-weight: 600;
-  cursor: default;
-  transition: color 0.3s;
-}
-
-.skills-content span i {
-  font-size: 2rem;
-  color: #00abf0;
-  margin-bottom: 0.5rem;
-  transition: color 0.3s;
-}
-
-.skills-content span:hover i,
-.skills-content span:hover {
-  color: #0084c7;
-}
-
 
 
 /* White section full-width styling */
 .contact-section {
   background-color: #0084c7;
   color: #ffffff;
-  padding: 4rem 2rem 6rem 2rem;
-  width: 100vw;
-  max-width: 100vw;
+  padding: 4rem 0 6rem 0;  /* Remove left/right padding */
+  width: 100%;
   margin: 0;
   box-sizing: border-box;
 }
 
-/* Contact container */
+/* Container spans full width, no centering */
 .contact-container {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  width: 100%;       /* Full width */
+  margin: 0;         /* Remove auto centering */
+  padding: 0 2rem;   /* Optional small padding inside */
 }
 
 /* Each contact item with icon */
@@ -108,6 +51,7 @@
   color: #ffffff;
 }
 
+/* Icon size */
 .contact-item i {
   font-size: 2.5rem;
   color: #ffffff;
@@ -126,14 +70,130 @@
 }
 
 
-/* ===== Responsive for Smaller Screens ===== */
-@media (max-width: 768px) {
-  .skills-container {
-    flex-direction: column;
-    align-items: center;
-  }
 
-  .skills-content span i {
-    font-size: 1.8rem;
-  }
+
+
+
+/* ========================================================= */
+/* =============== NEW CSS FOR RESOURCES PAGE =============== */
+/* ========================================================= */
+
+
+.innovation-header {
+  text-align: left;
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-left: 8rem;  /* Starting point */
+}
+
+.lab-logo {
+  width: 100px;
+  height: auto;
+}
+
+.internship-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--main-color);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Horizontal Section: Experience | Picture | Skills */
+.resources-layout {
+  display: flex;
+  justify-content: flex-start; /* Align left */
+  align-items: flex-start;
+  padding: 3rem 8rem;
+  gap: 4rem; /* Increased space between columns */
+  flex-wrap: wrap;
+}
+
+/* Each Column */
+.resources-column {
+  flex: 1 1 30%;
+  min-width: 250px;
+}
+
+/* Experience Section */
+.experience-column {
+  text-align: left;
+  color: #00abf0;
+  font-size: 1.2rem;
+}
+
+.experience-column h2 {
+  font-size: 2.5rem;
+  color: #00abf0;
+  margin-bottom: 1rem;
+  margin-left: 0; /* Align with paragraph */
+}
+
+.experience-column p {
+  line-height: 1.6;
+}
+
+/* Picture Section */
+.picture-column img {
+  width: 400px;
+  height: 500px; /* Square */
+  object-fit: cover;
+  border-radius: 15px;
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+}
+
+/* Skills Section */
+.skills-column {
+  text-align: left;
+  font-size: 1.2rem;
+  color: #00abf0;
+}
+
+.skills-column h2 {
+  font-size: 2.5rem;
+  color: #00abf0;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skill-item {
+  position: relative;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  border-left: none; /* Remove vertical line */
+}
+
+/* Remove vertical line separator and keep horizontal line only */
+.skill-item::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: #00abf0;
+  width: 100%;
+  margin-top: 0.5rem;
+  opacity: 0.5;
+}
+
+/* Plus toggle at the end */
+.skill-item span.plus-toggle {
+  position: absolute;
+  right: 0;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #00abf0;
+}
+
+/* Hidden description */
+.skill-description {
+  display: none;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #00abf0;
 }
